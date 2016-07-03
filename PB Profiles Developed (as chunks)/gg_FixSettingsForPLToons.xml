@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy ChildrenCount="2">
+  <If Condition="true" IgnoreCanRun="True" ChildrenCount="11">
+    <CustomAction Code="CharacterSettings.Instance.UseMount = true;" />
+    <CustomAction Code="CharacterSettings.Instance.UseRandomMount =false;" />
+    <CustomAction Code="CharacterSettings.Instance.HarvestHerbs =false;" />
+    <CustomAction Code="CharacterSettings.Instance.HarvestMinerals =false;" />
+    <CustomAction Code="CharacterSettings.Instance.LootMobs = true;" />
+    <CustomAction Code="CharacterSettings.Instance.UseFlightPaths = true;" />
+    <CustomAction Code="CharacterSettings.Instance.LootChests = true;" />
+    <CustomAction Code="CharacterSettings.Instance.FindVendorsAutomatically = true;" />
+    <CustomAction Code="CharacterSettings.Instance.TrainNewSkills = true;" />
+    <CustomAction Code="CharacterSettings.Instance.LearnFlightPaths = true;" />
+    <CustomAction Code="LevelbotSettings.Instance.GroundMountFarmingMode=false;" />
+  </If>
+  <If Condition="false" IgnoreCanRun="True" ChildrenCount="13">
+    <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 6948 then UseContainerItem(bag,slot) end end end&quot;);" />
+    <WaitAction Condition="false" Timeout="20" />
+    <SellItemAction NpcEntry="0" X="0" Y="0" Z="0" ItemID="" Count="0" SellItemType="Greys" />
+    <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_24_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="95" UndercutPrecent="0.1" UseCategory="True" Category="Armor" SubCategoryType="WoWItemArmorClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+    <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_24_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="95" UndercutPrecent="2" UseCategory="True" Category="Weapon" SubCategoryType="WoWItemWeaponClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+    <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_24_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="95" UndercutPrecent="0.1" UseCategory="True" Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+    <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_24_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="95" UndercutPrecent="0.1" UseCategory="True" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+    <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_24_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="95" UndercutPrecent="0.1" UseCategory="True" Category="Recipe" SubCategoryType="WoWItemRecipeClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+    <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_24_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="95" UndercutPrecent="0.1" UseCategory="True" Category="Miscellaneous" SubCategoryType="WoWItemMiscClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+    <SellItemAction NpcEntry="0" X="0" Y="0" Z="0" ItemID="" Count="0" SellItemType="Whites" />
+    <SellItemAction NpcEntry="0" X="0" Y="0" Z="0" ItemID="" Count="0" SellItemType="Greens" />
+    <SellItemAction NpcEntry="0" X="0" Y="0" Z="0" ItemID="" Count="0" SellItemType="Greys" />
+    <Comment Text="Modify it with proper banking routine call it when bags are full handle all train gear things and AH things when in base keep relocate yourself and keep what are you doing" />
+  </If>
+</Professionbuddy>

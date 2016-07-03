@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy ChildrenCount="3">
+  <CustomAction Code="Log(Me.AccountName+&quot;,&quot;+System.DateTime.Now.ToString()+&quot;,&quot;+Me.Name+&quot;,&quot;+Me.Level+&quot;,&quot;+Me.Experience+&quot;,&quot;+Styx.Logic.BehaviorTree.TreeRoot.IsRunning.ToString());" />
+  <CustomAction Code="Log(Me.GetPosition().ToString() +&quot;,&quot;+ Me.Gold);" />
+  <CustomAction Code="for (uint i=0; i&lt;55543; i++ ) {if (InbagCount(i)&gt;0) {Log( i.ToString()+&quot;,&quot;+InbagCount(i).ToString());}};" />
+</Professionbuddy>

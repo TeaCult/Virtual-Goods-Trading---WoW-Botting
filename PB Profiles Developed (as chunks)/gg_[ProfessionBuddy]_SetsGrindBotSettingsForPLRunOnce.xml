@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy ChildrenCount="11">
+  <CustomAction Code="CharacterSettings.Instance.UseMount = true;" />
+  <CustomAction Code="CharacterSettings.Instance.UseRandomMount = true;" />
+  <CustomAction Code="CharacterSettings.Instance.HarvestHerbs = true;" />
+  <CustomAction Code="CharacterSettings.Instance.HarvestMinerals = true;" />
+  <CustomAction Code="CharacterSettings.Instance.LootMobs = true;" />
+  <CustomAction Code="CharacterSettings.Instance.UseFlightPaths = false;" />
+  <CustomAction Code="CharacterSettings.Instance.LootChests = true;" />
+  <CustomAction Code="CharacterSettings.Instance.LearnFlightPaths = true;" />
+  <CustomAction Code="CharacterSettings.Instance.FindVendorsAutomatically = true;" />
+  <CustomAction Code="CharacterSettings.Instance.TrainNewSkills = true;" />
+  <CustomAction Code="Lua.DoString(&quot;Logout()&quot;);" />
+</Professionbuddy>

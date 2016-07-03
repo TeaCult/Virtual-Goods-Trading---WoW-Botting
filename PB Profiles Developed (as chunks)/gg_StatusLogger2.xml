@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy ChildrenCount="5">
+  <CustomAction Code="Log(&quot;A:&quot;+Me.AccountName+&quot;;D:&quot;+System.DateTime.Now.ToString()+&quot;;N:&quot;+Me.Name+&quot;;L:&quot;+Me.Level+&quot;;E:&quot;+Me.Experience+&quot;;R:&quot;+Styx.Logic.BehaviorTree.TreeRoot.IsRunning.ToString());" />
+  <CustomAction Code="Log(&quot;A:&quot;+Me.AccountName+&quot;;D:&quot;+System.DateTime.Now.ToString()+&quot;;N:&quot;+Me.Name+&quot;;P:&quot;+ Me.GetPosition().ToString() +&quot;;Z:&quot;+Me.RealZoneText+&quot;;G:&quot;+ Me.Gold);" />
+  <CustomAction Code="string temp=&quot;&quot;;for (uint i=0; i&lt;55543; i++ ) {if (InbagCount(i)&gt;0) {temp=temp+&quot;;&quot;+ i.ToString()+&quot;x&quot;+InbagCount(i).ToString();}};Log(&quot;A:&quot;+Me.AccountName+&quot;;D:&quot;+System.DateTime.Now.ToString()+&quot;;N:&quot;+Me.Name+&quot;;I:&quot;+temp);" />
+  <Comment Text="for (uint i=0; i&lt;55543; i++ ) {if (InbagCount(i)&gt;0) {Log( i.ToString()+&quot;,&quot;+InbagCount(i).ToString());}};" />
+  <Comment Text="string temp=&quot;&quot;;for (uint i=0; i&lt;55543; i++ ) {if (InbagCount(i)&gt;0) {temp=temp+&quot;IID:&quot;+ i.ToString()+&quot;IC:&quot;+InbagCount(i).ToString();}};Log(temp);" />
+</Professionbuddy>

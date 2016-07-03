@@ -1,0 +1,503 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy ChildrenCount="15">
+  <SubRoutine SubRoutineName="HearthStoneAndBankIfBagsAreFull" ChildrenCount="2">
+    <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 6948 then UseContainerItem(bag,slot) end end end&quot;);" />
+    <WaitAction Condition="Me.RealZoneText==&quot;Stormwind City&quot; || Me.RealZoneText==&quot;Orgrimmar&quot;" Timeout="20000" />
+  </SubRoutine>
+  <SubRoutine SubRoutineName="TakeStatusLog" ChildrenCount="3">
+    <CustomAction Code="Log(&quot;A:&quot;+Me.AccountName+&quot;;D:&quot;+System.DateTime.Now.ToString()+&quot;;N:&quot;+Me.Name+&quot;;L:&quot;+Me.Level+&quot;;E:&quot;+Me.Experience+&quot;;R:&quot;+Styx.Logic.BehaviorTree.TreeRoot.IsRunning.ToString());" />
+    <CustomAction Code="Log(&quot;A:&quot;+Me.AccountName+&quot;;D:&quot;+System.DateTime.Now.ToString()+&quot;;N:&quot;+Me.Name+&quot;;P:&quot;+ Me.GetPosition().ToString() +&quot;;Z:&quot;+Me.RealZoneText+&quot;;G:&quot;+ Me.Gold);" />
+    <CustomAction Code="string temp=&quot;&quot;;for (uint i=0; i&lt;55543; i++ ) {if (InbagCount(i)&gt;0) {temp=temp+&quot;;&quot;+ i.ToString()+&quot;x&quot;+InbagCount(i).ToString();}};Log(&quot;A:&quot;+Me.AccountName+&quot;;D:&quot;+System.DateTime.Now.ToString()+&quot;;N:&quot;+Me.Name+&quot;;I:&quot;+temp);" />
+  </SubRoutine>
+  <SubRoutine SubRoutineName="SetBotSettingsForPL" ChildrenCount="12">
+    <CustomAction Code="CharacterSettings.Instance.UseMount = true;" />
+    <CustomAction Code="CharacterSettings.Instance.UseRandomMount =false;" />
+    <CustomAction Code="LevelbotSettings.Instance.GroundMountFarmingMode=false;" />
+    <CustomAction Code="CharacterSettings.Instance.LearnFlightPaths = true;" />
+    <CustomAction Code="CharacterSettings.Instance.UseFlightPaths = true;" />
+    <CustomAction Code="CharacterSettings.Instance.HarvestHerbs =true;" />
+    <CustomAction Code="CharacterSettings.Instance.HarvestMinerals =true;" />
+    <CustomAction Code="CharacterSettings.Instance.LootMobs = true;" />
+    <CustomAction Code="CharacterSettings.Instance.LootChests = true;" />
+    <CustomAction Code="CharacterSettings.Instance.FindVendorsAutomatically = true;" />
+    <If Condition="Me.RealZoneText==&quot;Stormwind City&quot; || Me.RealZoneText==&quot;Orgrimmar&quot;" IgnoreCanRun="True" ChildrenCount="1">
+      <CustomAction Code="CharacterSettings.Instance.TrainNewSkills = true;" />
+    </If>
+    <If Condition="!(Me.RealZoneText==&quot;Stormwind City&quot; || Me.RealZoneText==&quot;Orgrimmar&quot;)" IgnoreCanRun="True" ChildrenCount="1">
+      <CustomAction Code="CharacterSettings.Instance.TrainNewSkills = false;" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="SwitchToGathering" ChildrenCount="1">
+    <LoadProfileAction Path="[315-415]- Ryans Outlands Mega Route without SMV[HB].xml" ProfileType="Honorbuddy" />
+  </SubRoutine>
+  <SubRoutine SubRoutineName="StandAloneBanking" ChildrenCount="19">
+    <SubRoutine SubRoutineName="PreLaunch" ChildrenCount="4">
+      <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="1">
+        <LoadProfileAction Path="gg_[GB2]Orgrimmar_Banking.xml" ProfileType="Honorbuddy" />
+      </If>
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+        <LoadProfileAction Path="gg_[GB2]Stormwind_Banking.xml" ProfileType="Honorbuddy" />
+      </If>
+      <If Condition="Me.IsAlliance &amp;&amp; Me.RealZoneText!=&quot;Stormwind City&quot;" IgnoreCanRun="True" ChildrenCount="1">
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8860" Y="639" Z="96" />
+      </If>
+      <If Condition="Me.IsHorde &amp;&amp; Me.RealZoneText!=&quot;Orgrimmar&quot;" IgnoreCanRun="True" ChildrenCount="1">
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="1552" Y="-4376" Z="17" />
+      </If>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="GetAllMail" ChildrenCount="2">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+        <GetMailAction ItemID="0" CheckNewMail="True" GetMailType="AllItems" AutoFindMailBox="False" X="-8860" Y="637" Z="96" MinFreeBagSlots="2" />
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="1">
+        <GetMailAction ItemID="0" CheckNewMail="True" GetMailType="AllItems" AutoFindMailBox="False" X="1605.058" Y="-4422.912" Z="13.71172" MinFreeBagSlots="2" />
+      </If>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="SellAllToAH" ChildrenCount="8">
+      <SellItemOnAhAction ItemID="0" MinBuyout="0g50s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="1" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="0" MinBuyout="0g50s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="0" MinBuyout="0g50s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="1" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Miscellaneous" SubCategoryType="WoWItemMiscClass" SubCategory="Pet" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="95" UndercutPrecent="2" UseCategory="True" Category="Miscellaneous" SubCategoryType="WoWItemMiscClass" SubCategory="Mount" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="1" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Weapon" SubCategoryType="WoWItemWeaponClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="1" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Armor" SubCategoryType="WoWItemArmorClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="1" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Container" SubCategoryType="SubCategoryType" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Recipe" SubCategoryType="WoWItemRecipeClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="VendorUnwanted" ChildrenCount="3">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="2">
+        <SellItemAction NpcEntry="6740" X="-8865.786" Y="669.6729" Z="97.90324" ItemID="7912" Count="100" SellItemType="Specific" />
+        <SellItemAction NpcEntry="6740" X="-8865.786" Y="669.6729" Z="97.90324" ItemID="" Count="0" SellItemType="Greys" />
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="2">
+        <SellItemAction NpcEntry="3342" X="0" Y="0" Z="0" ItemID="" Count="0" SellItemType="Greys" />
+        <SellItemAction NpcEntry="3342" X="1627.99" Y="-4386.13" Z="20.98246" ItemID="7912" Count="100" SellItemType="Specific" />
+      </If>
+      <WaitAction Condition="false" Timeout="2500" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="SellAllToVendor" ChildrenCount="3">
+      <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="3">
+        <SellItemAction NpcEntry="3342" X="1627.99" Y="-4386.13" Z="20.98238" ItemID="" Count="0" SellItemType="Greys" />
+        <SellItemAction NpcEntry="3342" X="1627.99" Y="-4386.13" Z="20.98238" ItemID="" Count="0" SellItemType="Greens" />
+        <SellItemAction NpcEntry="3342" X="1627.99" Y="-4386.13" Z="20.98238" ItemID="" Count="0" SellItemType="Whites" />
+      </If>
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="3">
+        <SellItemAction NpcEntry="6740" X="-8865.786" Y="669.6729" Z="97.90324" ItemID="" Count="0" SellItemType="Greys" />
+        <SellItemAction NpcEntry="6740" X="-8865.786" Y="669.6729" Z="97.90324" ItemID="" Count="0" SellItemType="Whites" />
+        <SellItemAction NpcEntry="6740" X="-8865.786" Y="669.6729" Z="97.90324" ItemID="" Count="0" SellItemType="Greens" />
+      </If>
+      <WaitAction Condition="false" Timeout="2500" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="ReadAllMails" ChildrenCount="6">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8862" Y="642" Z="96" />
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="1">
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="1605.058" Y="-4422.912" Z="13.71172" />
+      </If>
+      <InteractionAction Entry="197135" InteractDelay="0" InteractType="GameObject" GameObjectType="Mailbox" SpellFocus="Anvil" />
+      <CustomAction Code="Lua.DoString( &quot;CheckInbox()&quot; );" />
+      <CustomAction Code="Lua.DoString(&quot;for mail=1,50 do GetInboxText(mail) end&quot;);" />
+      <SubRoutine SubRoutineName="FixBaseMoney" ChildrenCount="1">
+        <While Condition="Me.Gold &lt;3" IgnoreCanRun="True" ChildrenCount="3">
+          <CallSubRoutine SubRoutineName="GetAllMail" />
+          <CallSubRoutine SubRoutineName="SellAllToVendor" />
+          <CallSubRoutine SubRoutineName="MailMaintainAndRefresh" />
+        </While>
+      </SubRoutine>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="gg_GetAllMail" ChildrenCount="6">
+      <While Condition="(HasNewMail || MailCount&gt;0 )  &amp;&amp; Me.FreeBagSlots&gt;2" IgnoreCanRun="True" ChildrenCount="5">
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="2">
+          <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8862" Y="642" Z="96" />
+          <InteractionAction Entry="197135" InteractDelay="0" InteractType="GameObject" GameObjectType="Mailbox" SpellFocus="Anvil" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="2">
+          <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="1605.058" Y="-4422.912" Z="13.71172" />
+          <InteractionAction Entry="206726" InteractDelay="0" InteractType="GameObject" GameObjectType="Mailbox" SpellFocus="Anvil" />
+        </If>
+        <CustomAction Code="for (int i = 1; i &lt;= 900; i++) { Lua.DoString(&quot; for mail=1,50 do for item=1,12 do if GetInboxItem(mail,item) then TakeInboxItem(mail,item) end TakeInboxMoney(mail) end end&quot;);}" />
+        <CustomAction Code="for (int i = 1; i &lt;= 90; i++) { Lua.DoString(&quot;for i=1,50 do if not GetInboxItem(i,1) then DeleteInboxItem(i) end end;&quot;); }" />
+        <CustomAction Code="Lua.DoString(&quot;CheckInbox()&quot;);" />
+      </While>
+      <Comment Text="( HasNewMail || MailCount &gt;0 ) &amp;&amp; Me.FreeBagSlots &gt;2" />
+      <Comment Text="Lua.DoString(&quot;for i=1,50 do if not GetInboxItem(1,1) then DeleteInboxItem(i) end end&quot;);" />
+      <Comment Text="Lua.DoString(&quot; for money=1,50 do TakeInboxMoney(money) end&quot;);" />
+      <Comment Text="Lua.DoString(&quot; for money=1,50 do GetInboxText(money) end&quot;);" />
+      <Comment Text="Lua.DoString(&quot; for mail=1,50 do for item=1,12 do TakeInboxItem(mail,item) end end&quot;);" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="WalkingPathFixForVendoring" ChildrenCount="1">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8851.786" Y="647.6729" Z="96.90336" />
+      </If>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="FixLowGold" ChildrenCount="1">
+      <If Condition="Me.Gold&lt;5" IgnoreCanRun="True" ChildrenCount="1">
+        <CallSubRoutine SubRoutineName="SellAllToVendor" />
+      </If>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="PutMoneyAndItemsToGuildBank" ChildrenCount="1">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="7">
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8926.106" Y="615.12" Z="100.22" />
+        <PutItemInBankAction Amount="0" ItemID="0" NpcEntry="0" GuildTab="0" AutoFindBank="True" UseCategory="True" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" Bank="Guild" X="0" Y="0" Z="0" />
+        <PutItemInBankAction Amount="0" ItemID="0" NpcEntry="0" GuildTab="0" AutoFindBank="True" UseCategory="True" Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" Bank="Guild" X="0" Y="0" Z="0" />
+        <PutItemInBankAction Amount="0" ItemID="0" NpcEntry="0" GuildTab="0" AutoFindBank="True" UseCategory="True" Category="Miscellaneous" SubCategoryType="WoWItemMiscClass" SubCategory="None" Bank="Guild" X="0" Y="0" Z="0" />
+        <InteractionAction Entry="205107" InteractDelay="0" InteractType="GameObject" GameObjectType="GuildBank" SpellFocus="Anvil" />
+        <WaitAction Condition="false" Timeout="2000" />
+        <If Condition="Me.Gold &gt;10000" IgnoreCanRun="True" ChildrenCount="1">
+          <CustomAction Code="Lua.DoString(&quot;DepositGuildBankMoney(GetMoney()-30000000)&quot;);" />
+        </If>
+      </If>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="WithDrawItemsFromBankSpecifiedAmount" ChildrenCount="42">
+      <Comment Text="Hardened Elementium Ore" />
+      <GetItemfromBankAction ItemID="53039" Amount="80" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <Comment Text="elementium bar" />
+      <GetItemfromBankAction ItemID="52186" Amount="800" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <Comment Text="cinderbloom" />
+      <GetItemfromBankAction ItemID="52983" Amount="800" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <Comment Text="whiptail" />
+      <GetItemfromBankAction ItemID="52988" Amount="800" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <Comment Text="pyrium bar" />
+      <GetItemfromBankAction ItemID="51950" Amount="100" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <Comment Text="volatile life" />
+      <GetItemfromBankAction ItemID="52329" Amount="400" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <Comment Text="volatile earth" />
+      <GetItemfromBankAction ItemID="52327" Amount="400" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <Comment Text="volatile fire" />
+      <GetItemfromBankAction ItemID="52325" Amount="400" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <Comment Text="volatile water" />
+      <GetItemfromBankAction ItemID="52326" Amount="400" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <Comment Text="AllGems" />
+      <GetItemfromBankAction ItemID="52175" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52176" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52177" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52178" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52179" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52180" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52181" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52182" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52183" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52184" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52185" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52186" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52187" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52188" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52189" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52190" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52191" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52192" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52193" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52194" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52195" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="52196" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+      <GetItemfromBankAction ItemID="67282" Amount="3" Bank="Guild" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="RuthLess Sell" ChildrenCount="2">
+      <InteractionAction Entry="6740" InteractDelay="0" InteractType="NPC" GameObjectType="Mailbox" SpellFocus="Anvil" />
+      <CustomAction Code="for (int k=1; k&gt;100; k++) {Lua.DoString(&quot;for bag=0,4 do for slot=1,32 do UseContainerItem(bag,slot) end end&quot;);};" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="BankingRoutineRun" ChildrenCount="2">
+      <CallSubRoutine SubRoutineName="gg_GetAllMail" />
+      <CallSubRoutine SubRoutineName="PutMoneyAndItemsToGuildBank" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="LvL85Banking" ChildrenCount="5">
+      <CallSubRoutine SubRoutineName="PreLaunch" />
+      <CallSubRoutine SubRoutineName="BankingRoutineRun" />
+      <While Condition="HasNewMail || MailCount &gt;0" IgnoreCanRun="True" ChildrenCount="1">
+        <CallSubRoutine SubRoutineName="BankingRoutineRun" />
+      </While>
+      <If Condition="!HasNewMail &amp;&amp; MailCount ==0" IgnoreCanRun="True" ChildrenCount="3">
+        <CallSubRoutine SubRoutineName="BankingRoutineRun" />
+        <CallSubRoutine SubRoutineName="WithDrawItemsFromBankSpecifiedAmount" />
+        <CallSubRoutine SubRoutineName="SellAllToAH" />
+      </If>
+      <While Condition="!HasNewMail &amp;&amp; MailCount ==0" IgnoreCanRun="True" ChildrenCount="2">
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="2">
+          <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8860" Y="639" Z="96" />
+          <CustomAction Code="Lua.DoString(&quot;ForceQuit()&quot;);" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="2">
+          <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="1552" Y="-4376" Z="17" />
+          <CustomAction Code="Lua.DoString(&quot;ForceQuit()&quot;);" />
+        </If>
+      </While>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="LvL1-70StandAloneBanking" ChildrenCount="13">
+      <CallSubRoutine SubRoutineName="PreLaunch" />
+      <CallSubRoutine SubRoutineName="VendorUnwanted" />
+      <WaitAction Condition="false" Timeout="2000" />
+      <CallSubRoutine SubRoutineName="SellAllToAH" />
+      <WaitAction Condition="false" Timeout="2000" />
+      <GetMailAction ItemID="" CheckNewMail="True" GetMailType="AllItems" AutoFindMailBox="False" X="-8859.038" Y="637.23" Z="96.17724" MinFreeBagSlots="40" />
+      <WaitAction Condition="false" Timeout="2000" />
+      <CallSubRoutine SubRoutineName="SellAllToVendor" />
+      <WaitAction Condition="false" Timeout="2000" />
+      <CallSubRoutine SubRoutineName="gg_GetAllMail" />
+      <CallSubRoutine SubRoutineName="SellAllToAH" />
+      <WaitAction Condition="false" Timeout="2000" />
+      <While Condition="HasNewMail || MailCount&gt;0" IgnoreCanRun="True" ChildrenCount="3">
+        <CallSubRoutine SubRoutineName="gg_GetAllMail" />
+        <CallSubRoutine SubRoutineName="SellAllToVendor" />
+        <WaitAction Condition="false" Timeout="2000" />
+      </While>
+    </SubRoutine>
+    <CallSubRoutine SubRoutineName="TakeStatusLog" />
+    <CallSubRoutine SubRoutineName="LvL1-70StandAloneBanking" />
+    <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8860.425" Y="639.0901" Z="96.46788" />
+    <WaitAction Condition="false" Timeout="5000" />
+  </SubRoutine>
+  <SubRoutine SubRoutineName="SetGatheringSettings" ChildrenCount="8">
+    <SubRoutine SubRoutineName="SetLootsAndHarvestSettings" ChildrenCount="6">
+      <CustomAction Code="CharacterSettings.Instance.LootMobs = false;" />
+      <CustomAction Code="CharacterSettings.Instance.LootChests =false;" />
+      <CustomAction Code="CharacterSettings.Instance.HarvestMinerals =true;" />
+      <CustomAction Code="CharacterSettings.Instance.HarvestHerbs =true;" />
+      <CustomAction Code="CharacterSettings.Instance.LootRadius =100;" />
+      <CustomAction Code="Bots.Gatherbuddy.GatherbuddySettings.Instance.BlacklistTimer = 8;" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="SetFlightPaths" ChildrenCount="2">
+      <CustomAction Code="CharacterSettings.Instance.UseFlightPaths = false;" />
+      <CustomAction Code="CharacterSettings.Instance.LearnFlightPaths = false;" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="SetMountOptions" ChildrenCount="4">
+      <CustomAction Code="CharacterSettings.Instance.UseMount = true;" />
+      <CustomAction Code="CharacterSettings.Instance.UseRandomMount =false;" />
+      <CustomAction Code="LevelbotSettings.Instance.GroundMountFarmingMode=false;" />
+      <CustomAction Code="CharacterSettings.Instance.MountDistance = 10;" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="SetTrainAndRepairOptions" ChildrenCount="2">
+      <CustomAction Code="CharacterSettings.Instance.FindVendorsAutomatically = true;" />
+      <CustomAction Code="CharacterSettings.Instance.TrainNewSkills = false;" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="SetGeneralOptions" ChildrenCount="1">
+      <CustomAction Code="CharacterSettings.Instance.PullDistance =5;" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="SetGatherbuddySettings" ChildrenCount="2">
+      <CustomAction Code="Bots.Gatherbuddy.GatherbuddySettings.Instance.MailToAlt = true;" />
+      <CustomAction Code="CharacterSettings.Instance.MailRecipient =&quot;dummy&quot;;" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="SetBotSettingsMain" ChildrenCount="6">
+      <CallSubRoutine SubRoutineName="SetLootsAndHarvestSettings" />
+      <CallSubRoutine SubRoutineName="SetFlightPaths" />
+      <CallSubRoutine SubRoutineName="SetMountOptions" />
+      <CallSubRoutine SubRoutineName="SetTrainAndRepairOptions" />
+      <CallSubRoutine SubRoutineName="SetGeneralOptions" />
+      <CallSubRoutine SubRoutineName="SetGatherbuddySettings" />
+    </SubRoutine>
+    <CallSubRoutine SubRoutineName="SetBotSettingsMain" />
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Maintainance" ChildrenCount="7">
+    <SubRoutine SubRoutineName="OpenScumCoveredBags" ChildrenCount="1">
+      <While Condition="InbagCount(20767)!=0" IgnoreCanRun="True" ChildrenCount="4">
+        <CustomAction Code="Lua.DoString(&quot;OpenAllBags()&quot;);" />
+        <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do if GetContainerItemID(bag,slot)==20767 then UseContainerItem(bag,slot) return(0) end end end&quot;);" />
+        <WaitAction Condition="false" Timeout="300" />
+        <CustomAction Code="Styx.Logic.Inventory.Frames.LootFrame.LootFrame.Instance.LootAll();" />
+      </While>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="BindToTradeDisctrict at Stormwind" ChildrenCount="6">
+      <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8865.614" Y="672.413" Z="97.90346" />
+      <InteractionAction Entry="6740" InteractDelay="0" InteractType="NPC" GameObjectType="Mailbox" SpellFocus="Anvil" />
+      <WaitAction Condition="false" Timeout="500" />
+      <CustomAction Code="Lua.DoString(&quot;if GetBindLocation()!=\&quot;Trade Disctrict\&quot; then SelectGossipOption(1) end&quot;);" />
+      <WaitAction Condition="false" Timeout="500" />
+      <CustomAction Code="Lua.DoString(&quot;if StaticPopup1Button1 and StaticPopup1Button1:IsVisible() then StaticPopup1Button1:Click(); end&quot;);" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="BuyNeatherweaveBags at Stormwind" ChildrenCount="2">
+      <If Condition="InbagCount(21841)&gt;0" IgnoreCanRun="True" ChildrenCount="3">
+        <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do if GetContainerItemID(bag,slot)==21841 then PickupContainerItem(bag, slot); EquipCursorItem(20); return(0) end end end&quot;);" />
+        <WaitAction Condition="false" Timeout="1000" />
+        <CustomAction Code="Lua.DoString(&quot;if StaticPopup1Button1 and StaticPopup1Button1:IsVisible() then StaticPopup1Button1:Click(); end&quot;);" />
+      </If>
+      <If Condition="Me.Gold&gt;=75" IgnoreCanRun="True" ChildrenCount="4">
+        <If Condition="!Me.GetBag(Styx.WoWBagSlot.Bag1).ToString().Contains(&quot;Netherweave&quot;) &amp;&amp; Me.GetBag(Styx.WoWBagSlot.Bag1).Slots&lt;16" IgnoreCanRun="True" ChildrenCount="5">
+          <BuyItemFromAhAction ItemID="21841" MaxBuyout="75g0s0c" Amount="1" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" BuyAdditively="True" />
+          <WaitAction Condition="false" Timeout="20000" />
+          <GetMailAction ItemID="21841" CheckNewMail="True" GetMailType="Specific" AutoFindMailBox="False" X="-8859.529" Y="639.0893" Z="96.44579" MinFreeBagSlots="2" />
+          <WaitAction Condition="false" Timeout="2000" />
+          <If Condition="InbagCount(21841)!=0" IgnoreCanRun="True" ChildrenCount="3">
+            <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do if GetContainerItemID(bag,slot)==21841 then PickupContainerItem(bag, slot); EquipCursorItem(20); return(0) end end end&quot;);" />
+            <WaitAction Condition="false" Timeout="1000" />
+            <CustomAction Code="Lua.DoString(&quot;if StaticPopup1Button1 and StaticPopup1Button1:IsVisible() then StaticPopup1Button1:Click(); end&quot;);" />
+          </If>
+        </If>
+        <If Condition="!Me.GetBag(Styx.WoWBagSlot.Bag2).ToString().Contains(&quot;Netherweave&quot;) &amp;&amp; Me.GetBag(Styx.WoWBagSlot.Bag2).Slots&lt;16" IgnoreCanRun="True" ChildrenCount="5">
+          <BuyItemFromAhAction ItemID="21841" MaxBuyout="75g0s0c" Amount="1" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" BuyAdditively="True" />
+          <WaitAction Condition="false" Timeout="20000" />
+          <GetMailAction ItemID="21841" CheckNewMail="True" GetMailType="Specific" AutoFindMailBox="False" X="-8859.529" Y="639.0893" Z="96.44579" MinFreeBagSlots="2" />
+          <WaitAction Condition="false" Timeout="2000" />
+          <If Condition="InbagCount(21841)!=0" IgnoreCanRun="True" ChildrenCount="3">
+            <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do if GetContainerItemID(bag,slot)==21841 then PickupContainerItem(bag, slot); EquipCursorItem(21); return(0) end end end&quot;);" />
+            <WaitAction Condition="false" Timeout="1000" />
+            <CustomAction Code="Lua.DoString(&quot;if StaticPopup1Button1 and StaticPopup1Button1:IsVisible() then StaticPopup1Button1:Click(); end&quot;);" />
+          </If>
+        </If>
+        <If Condition="!Me.GetBag(Styx.WoWBagSlot.Bag3).ToString().Contains(&quot;Netherweave&quot;) &amp;&amp; Me.GetBag(Styx.WoWBagSlot.Bag3).Slots&lt;16" IgnoreCanRun="True" ChildrenCount="5">
+          <GetMailAction ItemID="21841" CheckNewMail="True" GetMailType="Specific" AutoFindMailBox="False" X="-8859.529" Y="639.0893" Z="96.44579" MinFreeBagSlots="2" />
+          <WaitAction Condition="false" Timeout="20000" />
+          <BuyItemFromAhAction ItemID="21841" MaxBuyout="75g0s0c" Amount="1" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" BuyAdditively="True" />
+          <WaitAction Condition="false" Timeout="2000" />
+          <If Condition="InbagCount(21841)!=0" IgnoreCanRun="True" ChildrenCount="3">
+            <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do if GetContainerItemID(bag,slot)==21841 then PickupContainerItem(bag, slot); EquipCursorItem(23); return(0) end end end&quot;);" />
+            <WaitAction Condition="false" Timeout="1000" />
+            <CustomAction Code="Lua.DoString(&quot;if StaticPopup1Button1 and StaticPopup1Button1:IsVisible() then StaticPopup1Button1:Click(); end&quot;);" />
+          </If>
+        </If>
+        <If Condition="!Me.GetBag(Styx.WoWBagSlot.Bag4).ToString().Contains(&quot;Netherweave&quot;) &amp;&amp; Me.GetBag(Styx.WoWBagSlot.Bag4).Slots&lt;16" IgnoreCanRun="True" ChildrenCount="5">
+          <BuyItemFromAhAction ItemID="21841" MaxBuyout="75g0s0c" Amount="1" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" BuyAdditively="True" />
+          <WaitAction Condition="false" Timeout="20000" />
+          <GetMailAction ItemID="21841" CheckNewMail="True" GetMailType="Specific" AutoFindMailBox="False" X="-8859.529" Y="639.0893" Z="96.44579" MinFreeBagSlots="2" />
+          <WaitAction Condition="false" Timeout="2000" />
+          <If Condition="InbagCount(21841)!=0" IgnoreCanRun="True" ChildrenCount="3">
+            <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do if GetContainerItemID(bag,slot)==21841 then PickupContainerItem(bag, slot); EquipCursorItem(22); return(0) end end end&quot;);" />
+            <WaitAction Condition="false" Timeout="1000" />
+            <CustomAction Code="Lua.DoString(&quot;if StaticPopup1Button1 and StaticPopup1Button1:IsVisible() then StaticPopup1Button1:Click(); end&quot;);" />
+          </If>
+        </If>
+      </If>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="Repair at Stormwind" ChildrenCount="1">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="6">
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8828.698" Y="624.8342" Z="94.23566" />
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8790.195" Y="611.764" Z="96.77365" />
+        <InteractionAction Entry="1287" InteractDelay="0" InteractType="NPC" GameObjectType="Mailbox" SpellFocus="Anvil" />
+        <WaitAction Condition="false" Timeout="2000" />
+        <CustomAction Code="Styx.Logic.Vendors.RepairAllItems();" />
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8828.698" Y="624.8342" Z="94.23566" />
+      </If>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="TrainSkills at Stormwind" ChildrenCount="8">
+      <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8810.672" Y="349.6346" Z="107.0501" />
+      <TrainSkillAction NpcEntry="44247" X="-8820.38" Y="351.293" Z="107.0495" />
+      <WaitAction Condition="false" Timeout="2000" />
+      <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8810.672" Y="349.6346" Z="107.0501" />
+      <TrainSkillAction NpcEntry="43693" X="-8778.636" Y="381.7946" Z="100.843" />
+      <WaitAction Condition="false" Timeout="2000" />
+      <TrainSkillAction NpcEntry="43769" X="-8847.08" Y="501.6638" Z="109.6111" />
+      <WaitAction Condition="false" Timeout="2000" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="Compact_Motes" ChildrenCount="6">
+      <SubRoutine SubRoutineName="CompactMoteOfLife" ChildrenCount="1">
+        <While Condition="InbagCount(22575)&gt;10" IgnoreCanRun="True" ChildrenCount="1">
+          <CustomAction Code="for (int i=0;i&lt;100;i++) {Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 22575 then UseContainerItem(bag,slot) end end end&quot;);};" />
+        </While>
+      </SubRoutine>
+      <SubRoutine SubRoutineName="CompactMoteOfEarth" ChildrenCount="1">
+        <While Condition="InbagCount(22573)&gt;10" IgnoreCanRun="True" ChildrenCount="1">
+          <CustomAction Code="for (int i=0;i&lt;100;i++) {Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 22573 then UseContainerItem(bag,slot) end end end&quot;);};" />
+        </While>
+      </SubRoutine>
+      <SubRoutine SubRoutineName="CompactMoteOfFire" ChildrenCount="1">
+        <While Condition="InbagCount(22574)&gt;10" IgnoreCanRun="True" ChildrenCount="1">
+          <CustomAction Code="for (int i=0;i&lt;100;i++) {Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 22574 then UseContainerItem(bag,slot) end end end&quot;);};" />
+        </While>
+      </SubRoutine>
+      <CallSubRoutine SubRoutineName="CompactMoteOfLife" />
+      <CallSubRoutine SubRoutineName="CompactMoteOfEarth" />
+      <CallSubRoutine SubRoutineName="CompactMoteOfFire" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="FlyOverBurningSteppes39L43EPL" ChildrenCount="1">
+      <If Condition="Me.RealZoneText==&quot;Stormwind City&quot; &amp;&amp; Me.Level&gt;=39 &amp;&amp; Me.Level &lt;=43" IgnoreCanRun="True" ChildrenCount="4">
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8835.292" Y="490.3976" Z="109.6168" />
+        <InteractionAction Entry="352" InteractDelay="0" InteractType="NPC" GameObjectType="Mailbox" SpellFocus="Anvil" />
+        <WaitAction Condition="false" Timeout="2000" />
+        <CustomAction Code="Lua.DoString(&quot;for i=1,100 do nodename=TaxiNodeName(i) if nodename==\&quot;Thondroril River, Eastern Plaguelands\&quot; then TakeTaxiNode(i) end end&quot; );" />
+      </If>
+    </SubRoutine>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="ProfileLoader" ChildrenCount="4">
+    <If Condition="Me.Level &lt;60 " IgnoreCanRun="True" ChildrenCount="1">
+      <LoadProfileAction Path="GRIND Profiles\gg_[GrindBot]_PL_A_1-60.xml" ProfileType="Honorbuddy" />
+    </If>
+    <If Condition="Me.Level&gt;=60 &amp;&amp; Me.Level&lt;70" IgnoreCanRun="True" ChildrenCount="3">
+      <While Condition="!(Me.RealZoneText==&quot;Stormwind City&quot; || Me.MapId==530)" IgnoreCanRun="True" ChildrenCount="2">
+        <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 6948 then UseContainerItem(bag,slot) end end end&quot;);" />
+        <WaitAction Condition="false" Timeout="60000" />
+      </While>
+      <If Condition="Me.RealZoneText==&quot;Stormwind City&quot;" IgnoreCanRun="True" ChildrenCount="1">
+        <CallSubRoutine SubRoutineName="LocateFromStowmwindToHellfirePeninsula" />
+      </If>
+      <If Condition="Me.MapId==530" IgnoreCanRun="True" ChildrenCount="1">
+        <LoadProfileAction Path="GRIND Profiles\[A] BC 56-68 [Kick] Left.xml" ProfileType="Honorbuddy" />
+      </If>
+    </If>
+    <If Condition="Me.Level&gt;=70 &amp;&amp; (Mining.MaxLevel&lt;300 || Herbalism.MaxLevel&lt;300)" IgnoreCanRun="True" ChildrenCount="6">
+      <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 6948 then UseContainerItem(bag,slot) end end end&quot;);" />
+      <WaitAction Condition="false" Timeout="10000" />
+      <LoadProfileAction Path="gg_1-300 PB Mine-Herb PL DummyQuestingProfiles\Dummy Questing For Professionbuddy.xml" ProfileType="Honorbuddy" />
+      <LoadProfileAction Path="Mining-Herb (1-300)ground.xml" ProfileType="Professionbuddy" />
+      <CustomAction Code="LevelbotSettings.Instance.GroundMountFarmingMode=false;" />
+      <CustomAction Code="CharacterSettings.Instance.UseMount =false;" />
+    </If>
+    <If Condition="Me.Level&gt;=70 &amp;&amp; (Mining.MaxLevel&gt;=300 || Herbalism.MaxLevel&gt;=300)" IgnoreCanRun="True" ChildrenCount="3">
+      <While Condition="!(Me.RealZoneText==&quot;Stormwind City&quot; || Me.MapId==530)" IgnoreCanRun="True" ChildrenCount="2">
+        <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 6948 then UseContainerItem(bag,slot) end end end&quot;);" />
+        <WaitAction Condition="false" Timeout="60000" />
+      </While>
+      <If Condition="Me.RealZoneText==&quot;Stormwind City&quot;" IgnoreCanRun="True" ChildrenCount="1">
+        <CallSubRoutine SubRoutineName="LocateFromStowmwindToHellfirePeninsula" />
+      </If>
+      <If Condition="Me.MapId==530" IgnoreCanRun="True" ChildrenCount="1">
+        <CallSubRoutine SubRoutineName="LVL70Gathering" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="GatherPend" ChildrenCount="1">
+    <While Condition="System.DateTime.Now.Minute % 5 ==0 &amp;&amp; System.DateTime.Now.Second ==10" IgnoreCanRun="True" ChildrenCount="3">
+      <WaitAction Condition="false" Timeout="100" />
+      <CallSubRoutine SubRoutineName="TakeStatusLog" />
+      <If Condition="Me.FreeBagSlots&lt;4" IgnoreCanRun="True" ChildrenCount="1">
+        <CallSubRoutine SubRoutineName="HearthStoneAndBankIfBagsAreFull" />
+      </If>
+    </While>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="LocateFromStowmwindToHellfirePeninsula" ChildrenCount="2">
+    <If Condition="Me.Level&gt;=60 &amp;&amp; Me.Level &lt;=70 &amp;&amp; Me.RealZoneText==&quot;Stormwind City&quot;" IgnoreCanRun="True" ChildrenCount="6">
+      <Comment Text="Portal To Blasted Lands" />
+      <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-9007.121" Y="871.2941" Z="129.6937" />
+      <InteractionAction Entry="195141" InteractDelay="0" InteractType="GameObject" GameObjectType="Mailbox" SpellFocus="Anvil" />
+      <WaitAction Condition="false" Timeout="10000" />
+      <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-11913.76" Y="-3209.195" Z="-14.67249" />
+      <WaitAction Condition="false" Timeout="10000" />
+    </If>
+    <If Condition="Me.Level&gt;=60 &amp;&amp; Me.Level&lt;=70 &amp;&amp; Me.RealZoneText==&quot;Blasted Lands&quot;" IgnoreCanRun="True" ChildrenCount="2">
+      <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-11913.76" Y="-3209.195" Z="-14.67249" />
+      <WaitAction Condition="false" Timeout="10000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="LVL70Gathering" ChildrenCount="3">
+    <CallSubRoutine SubRoutineName="TakeStatusLog" />
+    <CallSubRoutine SubRoutineName="SetGatheringSettings" />
+    <While Condition="System.DateTime.Now.Minute % 5 ==0 &amp;&amp; System.DateTime.Now.Second ==1" IgnoreCanRun="True" ChildrenCount="3">
+      <WaitAction Condition="false" Timeout="100" />
+      <CallSubRoutine SubRoutineName="TakeStatusLog" />
+      <If Condition="Me.FreeBagSlots&lt;4" IgnoreCanRun="True" ChildrenCount="7">
+        <FlyToAction Dismount="True" X="-306.3995" Y="1025.418" Z="54.24712" />
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-306.3995" Y="1025.418" Z="54.24712" />
+        <CallSubRoutine SubRoutineName="HearthStoneAndBankIfBagsAreFull" />
+        <CustomAction Code="CharacterSettings.Instance.TrainNewSkills = true;" />
+        <CallSubRoutine SubRoutineName="Maintainance" />
+        <CallSubRoutine SubRoutineName="StandAloneBanking" />
+        <CallSubRoutine SubRoutineName="ProfileLoader" />
+      </If>
+    </While>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="LVL1-70_Main" ChildrenCount="3">
+    <CallSubRoutine SubRoutineName="SetBotSettingsForPL" />
+    <CallSubRoutine SubRoutineName="ProfileLoader" />
+    <While Condition="System.DateTime.Now.Minute % 10 ==0 &amp;&amp; System.DateTime.Now.Second ==10" IgnoreCanRun="True" ChildrenCount="3">
+      <WaitAction Condition="false" Timeout="100" />
+      <CallSubRoutine SubRoutineName="TakeStatusLog" />
+      <If Condition="Me.Level&gt;15 &amp;&amp; Me.FreeBagSlots&lt;10" IgnoreCanRun="True" ChildrenCount="5">
+        <CallSubRoutine SubRoutineName="HearthStoneAndBankIfBagsAreFull" />
+        <CustomAction Code="CharacterSettings.Instance.TrainNewSkills = true;" />
+        <CallSubRoutine SubRoutineName="Maintainance" />
+        <CallSubRoutine SubRoutineName="StandAloneBanking" />
+        <CallSubRoutine SubRoutineName="ProfileLoader" />
+      </If>
+    </While>
+  </SubRoutine>
+  <Comment Text="Dont Use Subroutines Because it is buggy too Just copy paste from them" />
+  <Comment Text="We Dont Change Bot  Because it creates Threading bug almost always - updates doesnt fix it" />
+  <CallSubRoutine SubRoutineName="LVL1-70_Main" />
+</Professionbuddy>

@@ -1,0 +1,30 @@
+SET groundEffectDensity 16
+SET groundEffectDist 1
+SET horizonfarclipScale 4
+SET farclip 50
+SET characterAmbient
+SET smallcull 1
+SET skycloudlod 1
+SET detailDoodadAlpha 1
+
+SET maxfps 36
+SET maxfpsbk 18
+
+SET textureCacheSize "8388608"
+SET gxDepthBits "16"
+SET gxColorBits 16
+SET M2UseShaders "0"
+SET ffxGlow "0"
+SET ffxDeath "0"
+SET gxResolution 150x200
+SET ffxspecial 0
+SET violenceLevel 0
+SET ffx "0"
+
+SET showTutorials 0
+SET UberTooltips 0
+SET showNewbieTips 0
+
+SET consolelines 100
+SET fontsize 18
+

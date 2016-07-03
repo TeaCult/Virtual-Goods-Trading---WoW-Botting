@@ -1,0 +1,232 @@
+<HBProfile creator="Kickazz006" version="0.1 Beta">
+	<!--
+			Special thanks to KillaKaz for helping me with the level flow
+			This profile starts in in the Orc starting area in Durator
+	-->
+	<Name>[H] 1-60 Grind TopK</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>62</MaxLevel>
+
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<!-- Notes for Kick
+	<Blackspot X="" Y="" Z="" Radius="" />
+	-->
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+
+	<TargetElites>False</TargetElites>
+	<!-- <ContinentID>1</ContinentID> -->
+
+	<SubProfile> <!-- NE Winterspring 51-54 -->
+		<Name>NE Winterspring 51-54</Name>
+		<MinLevel>1</MinLevel>
+		<MaxLevel>999</MaxLevel>
+		<Vendors> <!-- Goodgrub Smoking Pit --> <!-- are these friendly to horde -->
+			<Vendor Name="Trapper Kiefer" Entry="50094" Type="Repair" X="7636.76" Y="-4429.5" Z="623.8745" />
+			<Vendor Name="Barbie Cutesazz" Entry="50092" Type="Food" X="7637.553" Y="-4433.038" Z="623.8745" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Everlook -->
+			<Mailbox X="6707.655" Y="-4667.22" Z="721.3485" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>1</TargetMinLevel>
+			<TargetMaxLevel>999</TargetMaxLevel>
+			<Factions>999</Factions> <!-- [Bird, Bear, Boomkin, Chimaera] -->
+			<Hotspots>
+				<Hotspot X="7398.542" Y="-4683.472" Z="628.1865" />
+				<Hotspot X="7454.367" Y="-4688.446" Z="638.6012" />
+				<Hotspot X="7486.162" Y="-4748.478" Z="661.8536" />
+				<Hotspot X="7416.387" Y="-4787.299" Z="667.7889" />
+				<Hotspot X="7391.3" Y="-4750.782" Z="656.2627" />
+				<Hotspot X="7342.735" Y="-4726.327" Z="660.494" />
+				<Hotspot X="7312.834" Y="-4749.2" Z="671.349" />
+				<Hotspot X="7293.939" Y="-4772.684" Z="677.4506" />
+				<Hotspot X="7265.441" Y="-4815.669" Z="685.101" />
+				<Hotspot X="7278.562" Y="-4849.859" Z="693.5336" />
+				<Hotspot X="7300.896" Y="-4888.543" Z="710.8432" />
+				<Hotspot X="7268.655" Y="-4907.183" Z="715.2969" />
+				<Hotspot X="7245.367" Y="-4936.221" Z="724.6913" />
+				<Hotspot X="7212" Y="-4901.453" Z="713.2486" />
+				<Hotspot X="7183.575" Y="-4854.654" Z="697.2764" />
+				<Hotspot X="7170.811" Y="-4882.917" Z="702.9747" />
+				<Hotspot X="7129.024" Y="-4876.853" Z="698.4026" />
+				<Hotspot X="7139.688" Y="-4926.178" Z="707.8106" />
+				<Hotspot X="7107.651" Y="-4946.704" Z="715.1045" />
+				<Hotspot X="7078.264" Y="-4938.929" Z="727.7676" />
+				<Hotspot X="7092.086" Y="-4978.371" Z="720.2191" />
+				<Hotspot X="7058.255" Y="-5022.078" Z="712.7621" />
+				<Hotspot X="7022.458" Y="-5038.429" Z="704.785" />
+				<Hotspot X="6994.588" Y="-5077.738" Z="709.5928" />
+				<Hotspot X="6955.51" Y="-5136.113" Z="694.7264" />
+				<Hotspot X="7005.223" Y="-5087.199" Z="707.5079" />
+				<Hotspot X="7056.988" Y="-5101.911" Z="709.6479" />
+				<Hotspot X="7086.615" Y="-5049.458" Z="712.1894" />
+				<Hotspot X="7113.499" Y="-4981.329" Z="716.9484" />
+				<Hotspot X="7168.747" Y="-4978.472" Z="730.8499" />
+				<Hotspot X="7216.828" Y="-5019.759" Z="737.1148" />
+				<Hotspot X="7266.625" Y="-5018.62" Z="732.5533" />
+				<Hotspot X="7246.05" Y="-5057.592" Z="736.0933" />
+				<Hotspot X="7329.16" Y="-5052.626" Z="725.5051" />
+				<Hotspot X="7374.002" Y="-5061.535" Z="727.626" />
+				<Hotspot X="7413.898" Y="-5044.563" Z="733.2395" />
+				<Hotspot X="7449.485" Y="-5047.942" Z="729.5904" />
+				<Hotspot X="7456.063" Y="-5126.23" Z="742.2825" />
+				<Hotspot X="7491.31" Y="-5143.254" Z="748.6297" />
+				<Hotspot X="7496.164" Y="-5074.718" Z="728.5845" />
+				<Hotspot X="7523.328" Y="-5039.727" Z="715.5956" />
+				<Hotspot X="7594.522" Y="-5018.971" Z="705.7993" />
+				<Hotspot X="7597.218" Y="-4976.95" Z="701.042" />
+				<Hotspot X="7576.622" Y="-4939.864" Z="692.4866" />
+				<Hotspot X="7549.585" Y="-4910.351" Z="692.0637" />
+				<Hotspot X="7511.194" Y="-4859.713" Z="690.4438" />
+				<Hotspot X="7493.002" Y="-4809.39" Z="685.1446" />
+				<Hotspot X="7495.97" Y="-4733.136" Z="660.6185" />
+				<Hotspot X="7526.066" Y="-4688.102" Z="658.6995" />
+				<Hotspot X="7560.284" Y="-4647.479" Z="649.8016" />
+				<Hotspot X="7513.708" Y="-4610.482" Z="631.1035" />
+				<Hotspot X="7514.859" Y="-4564.719" Z="616.1233" />
+				<Hotspot X="7442.304" Y="-4593.311" Z="607.2679" />
+				<Hotspot X="7419.983" Y="-4666.546" Z="627.6281" />
+				<Hotspot X="7435.942" Y="-4708.731" Z="638.945" />
+								<Hotspot X="5727.267" Y="-4843.336" Z="780.0555" />
+				<Hotspot X="5714.855" Y="-4872.95" Z="790.4525" />
+				<Hotspot X="5707.812" Y="-4898.149" Z="798.3666" />
+				<Hotspot X="5698.08" Y="-4934.596" Z="803.3178" />
+				<Hotspot X="5711.366" Y="-4971.16" Z="807.2441" />
+				<Hotspot X="5727.536" Y="-4983.701" Z="809.7236" />
+				<Hotspot X="5686.695" Y="-4998.453" Z="807.0162" />
+				<Hotspot X="5688.708" Y="-5025.12" Z="808.5013" />
+				<Hotspot X="5677.979" Y="-4996.484" Z="806.9882" />
+				<Hotspot X="5637.298" Y="-5009.26" Z="809.1082" />
+				<Hotspot X="5658.621" Y="-4984.696" Z="807.7201" />
+				<Hotspot X="5639.878" Y="-4964.982" Z="808.4809" />
+				<Hotspot X="5674.449" Y="-4950.237" Z="804.3399" />
+				<Hotspot X="5617.323" Y="-4943.604" Z="813.2314" />
+				<Hotspot X="5566.862" Y="-4932.629" Z="832.4902" />
+				<Hotspot X="5531.782" Y="-4965.542" Z="844.5021" />
+				<Hotspot X="5507.784" Y="-4953.192" Z="849.9773" />
+				<Hotspot X="5521.979" Y="-4922.422" Z="843.8653" />
+				<!-- <Hotspot X="5447.657" Y="-4928.858" Z="873.5417" />
+				<Hotspot X="5387.07" Y="-4885.833" Z="835.4117" />
+				<Hotspot X="5386.795" Y="-4825.31" Z="808.0269" />
+				<Hotspot X="5387.086" Y="-4776.565" Z="809.5458" />
+				<Hotspot X="5354.505" Y="-4754.969" Z="811.671" />
+				<Hotspot X="5388.81" Y="-4730.625" Z="806.7812" />
+				<Hotspot X="5500.869" Y="-4678.054" Z="789.7537" />
+				<Hotspot X="5512.719" Y="-4634.728" Z="800.3101" />
+				<Hotspot X="5476.663" Y="-4637.672" Z="799.1979" />
+				<Hotspot X="5462.028" Y="-4604.459" Z="810.9713" />
+				<Hotspot X="5437.74" Y="-4563.343" Z="813.8013" />
+				<Hotspot X="5489.89" Y="-4588.269" Z="826.1232" />
+				<Hotspot X="5526.424" Y="-4559.776" Z="799.5435" /> --> <!-- These giants punt you off of the ledge -->
+				<Hotspot X="5698.08" Y="-4934.596" Z="803.3178" /> <!-- Lets use old points for a quick fix -->
+				<Hotspot X="5727.267" Y="-4843.336" Z="780.0555" /> <!-- Lets use old points for a quick fix -->
+				<Hotspot X="5659.351" Y="-4620.495" Z="770.3283" /> <!-- Lets use old points for a quick fix -->
+				<Hotspot X="5554.611" Y="-4526.855" Z="772.8759" /> <!-- Start of real points -->
+				<Hotspot X="5590.56" Y="-4479.284" Z="763.1479" />
+				<Hotspot X="5543.035" Y="-4484.511" Z="759.5571" />
+				<Hotspot X="5504.045" Y="-4496.339" Z="753.9918" />
+				<Hotspot X="5452.815" Y="-4504.911" Z="742.8822" />
+				<Hotspot X="5397.385" Y="-4511.443" Z="725.0651" />
+				<Hotspot X="5357.891" Y="-4535.372" Z="704.5132" />
+				<Hotspot X="5338.587" Y="-4587.277" Z="691.5815" />
+				<Hotspot X="5331.55" Y="-4647.079" Z="691.7491" />
+				<Hotspot X="5295.855" Y="-4681.68" Z="692.9849" />
+				<Hotspot X="5283.815" Y="-4714.147" Z="690.2986" />
+				<Hotspot X="5287.904" Y="-4747.184" Z="693.3519" />
+				<Hotspot X="5274.75" Y="-4787.117" Z="690.3319" />
+				<Hotspot X="5224.49" Y="-4782.602" Z="691.7545" />
+				<Hotspot X="5246.966" Y="-4829.946" Z="690.8214" />
+				<Hotspot X="5271.479" Y="-4821.33" Z="690.7413" />
+				<Hotspot X="5283.405" Y="-4746.919" Z="691.507" />
+				<Hotspot X="5285.082" Y="-4707.341" Z="690.6304" />
+				<Hotspot X="5316.973" Y="-4656.959" Z="691.5529" />
+				<Hotspot X="5343.461" Y="-4577.794" Z="692.4249" />
+				<Hotspot X="5360.685" Y="-4525.746" Z="709.4188" />
+				<Hotspot X="5415.002" Y="-4505.887" Z="730.8619" />
+				<Hotspot X="5465.693" Y="-4499.367" Z="746.5028" />
+				<Hotspot X="5508.43" Y="-4497.011" Z="754.4187" />
+				<Hotspot X="5555.245" Y="-4490.221" Z="758.4829" />
+				<Hotspot X="5592.614" Y="-4503.533" Z="760.4406" />
+				<Hotspot X="5608.784" Y="-4571.607" Z="771.9323" />
+				<Hotspot X="5603.841" Y="-4600.624" Z="775.0228" />
+				<Hotspot X="5643.166" Y="-4581.785" Z="768.5605" />
+				<Hotspot X="5659.351" Y="-4620.495" Z="770.3283" />
+				<Hotspot X="5610.222" Y="-4691.723" Z="781.5969" />
+				<Hotspot X="5609.468" Y="-4763.044" Z="779.5185" />
+			</Hotspots>
+		</GrindArea>
+		<AvoidMobs>
+			<Mob Name="Impsy" Entry="47339" />
+		</AvoidMobs>
+	</SubProfile>
+
+
+
+	<!-- Trainers
+		// VoT Trainers
+		<Vendor Name="Nartok" Entry="3156" Type="Train" TrainClass="Warlock" X="-590.8021" Y="-4203.484" Z="38.42772" />
+		<Vendor Name="Rwag" Entry="3155" Type="Train" TrainClass="Rogue" X="-617.059" Y="-4202.635" Z="38.13419" />
+		<Vendor Name="Shikrik" Entry="3157" Type="Train" TrainClass="Shaman" X="-623.9393" Y="-4203.878" Z="38.13438" />
+		<Vendor Name="Acrypha" Entry="39206" Type="Train" TrainClass="Mage" X="-625.296" Y="-4210.167" Z="38.13409" />
+		<Vendor Name="Karranisha" Entry="39214" Type="Train" TrainClass="Hunter" X="-635.4618" Y="-4227.521" Z="38.13442" />
+		<Vendor Name="Frang" Entry="3153" Type="Train" TrainClass="Warrior" X="-640.1024" Y="-4229.821" Z="38.13384" />
+	// Razor Hill 	<Vendor Name="Jabul" Entry="44380" Type="Train" TrainClass="Druid" X="342.061" Y="-4771.4" Z="12.6346" />
+	// Razor Hill 	<Vendor Name="Tai'jin" Entry="3706" Type="Train" TrainClass="Priest" X="294.8838" Y="-4831.495" Z="10.52397" />
+	// Org  <Vendor Name="Sunwalker Atohmo" Entry="44725" Type="Train" TrainClass="Paladin" X="1863.88" Y="-4292.69" Z="23.78161" />
+
+		// Razor Hill Trainers
+		<Vendor Name="Dhugru Gorelust" Entry="3172" Type="Train" TrainClass="Warlock" X="356.192" Y="-4837.954" Z="11.09003" />
+		<Vendor Name="Swart" Entry="3173" Type="Train" TrainClass="Shaman" X="307.1142" Y="-4839.906" Z="10.52483" />
+		<Vendor Name="Tarshaw Jaggedscar" Entry="3169" Type="Train" TrainClass="Warrior" X="311.3524" Y="-4827.792" Z="9.58133" />
+		<Vendor Name="Un'Thuwa" Entry="5880" Type="Train" TrainClass="Mage" X="334.717" Y="-4767.622" Z="12.63564" />
+		<Vendor Name="Thotar" Entry="3171" Type="Train" TrainClass="Hunter" X="275.3385" Y="-4703.997" Z="11.90329" />
+		<Vendor Name="Kaplak" Entry="3170" Type="Train" TrainClass="Rogue" X="268.1285" Y="-4710.936" Z="17.76719" />
+		<Vendor Name="Jabul" Entry="44380" Type="Train" TrainClass="Druid" X="342.061" Y="-4771.4" Z="12.6346" />
+		<Vendor Name="Tai'jin" Entry="3706" Type="Train" TrainClass="Priest" X="294.8838" Y="-4831.495" Z="10.52397" />
+	// Org  <Vendor Name="Sunwalker Atohmo" Entry="44725" Type="Train" TrainClass="Paladin" X="1863.88" Y="-4292.69" Z="23.78161" />
+
+		// Crossroads Trainers
+		<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+		<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+		<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+		<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+		<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+		<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+		<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+		<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+		<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+
+		// Orgrimmar Trainers
+		<Vendor Name="Marud" Entry="47247" Type="Train" TrainClass="Mage" X="1764.56" Y="-4349.509" Z="-7.769573" />
+		<Vendor Name="Gest" Entry="3327" Type="Train" TrainClass="Rogue" X="1777.26" Y="-4280.41" Z="7.691677" />
+		<Vendor Name="Mirket" Entry="3325" Type="Train" TrainClass="Warlock" X="1836.67" Y="-4361.48" Z="-14.65565" />
+		<Vendor Name="Shalla Whiteleaf" Entry="44726" Type="Train" TrainClass="Druid" X="1888.95" Y="-4285.25" Z="23.55561" />
+		<Vendor Name="Sahi Cloudsinger" Entry="44740" Type="Train" TrainClass="Shaman" X="1884.15" Y="-4282.4" Z="23.59196" />
+		<Vendor Name="Nohi Plainswalker" Entry="44743" Type="Train" TrainClass="Hunter" X="1872.89" Y="-4281.46" Z="23.76961" />
+		<Vendor Name="Nahu Ragehoof" Entry="44723" Type="Train" TrainClass="Warrior" X="1868.09" Y="-4284.32" Z="23.77243" />
+		<Vendor Name="Sunwalker Atohmo" Entry="44725" Type="Train" TrainClass="Paladin" X="1863.88" Y="-4292.69" Z="23.78161" />
+		<Vendor Name="Seer Liwatha" Entry="44735" Type="Train" TrainClass="Priest" X="1863.46" Y="-4297.75" Z="23.74977" />
+
+	-->
+</HBProfile>

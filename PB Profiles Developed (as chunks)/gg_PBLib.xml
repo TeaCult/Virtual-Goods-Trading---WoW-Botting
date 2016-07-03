@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy ChildrenCount="5">
+  <SubRoutine SubRoutineName="Banking Functions" ChildrenCount="9">
+    <SubRoutine SubRoutineName="FixLowGold" ChildrenCount="1">
+      <If Condition="Me.Gold&lt;5" IgnoreCanRun="True" ChildrenCount="1">
+        <CallSubRoutine SubRoutineName="SellAllToVendor" />
+      </If>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="WalkingPathFix" ChildrenCount="1">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8851.786" Y="647.6729" Z="96.90336" />
+      </If>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="gg_GetAllMail" ChildrenCount="6">
+      <While Condition="(HasNewMail || MailCount&gt;0 )  &amp;&amp; Me.FreeBagSlots&gt;2" IgnoreCanRun="True" ChildrenCount="5">
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="2">
+          <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8862" Y="642" Z="96" />
+          <InteractionAction Entry="197135" InteractDelay="0" InteractType="GameObject" GameObjectType="Mailbox" SpellFocus="Anvil" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="2">
+          <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="1605.058" Y="-4422.912" Z="13.71172" />
+          <InteractionAction Entry="206726" InteractDelay="0" InteractType="GameObject" GameObjectType="Mailbox" SpellFocus="Anvil" />
+        </If>
+        <CustomAction Code="for (int i = 1; i &lt;= 900; i++) { Lua.DoString(&quot; for mail=1,50 do for item=1,12 do if GetInboxItem(mail,item) then TakeInboxItem(mail,item) end end end&quot;);Lua.DoString(&quot; for money=1,50 do TakeInboxMoney(money) end&quot;);}" />
+        <CustomAction Code="for (int i = 1; i &lt;= 50; i++) {Lua.DoString(&quot;for i=1,50 do if not GetInboxItem(i,1) then DeleteInboxItem(i) end end&quot;);};" />
+        <CustomAction Code="Lua.DoString(&quot;ReloadUI()&quot;);" />
+      </While>
+      <Comment Text="( HasNewMail || MailCount &gt;0 ) &amp;&amp; Me.FreeBagSlots &gt;2" />
+      <Comment Text="Lua.DoString(&quot;for i=1,50 do if not GetInboxItem(1,1) then DeleteInboxItem(i) end end&quot;);" />
+      <Comment Text="Lua.DoString(&quot; for money=1,50 do TakeInboxMoney(money) end&quot;);" />
+      <Comment Text="Lua.DoString(&quot; for money=1,50 do GetInboxText(money) end&quot;);" />
+      <Comment Text="Lua.DoString(&quot; for mail=1,50 do for item=1,12 do TakeInboxItem(mail,item) end end&quot;);" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="BankingRoutineRun" ChildrenCount="6">
+      <CallSubRoutine SubRoutineName="FixBaseMoney" />
+      <CallSubRoutine SubRoutineName="gg_GetAllMail" />
+      <CallSubRoutine SubRoutineName="FixLowGold" />
+      <CallSubRoutine SubRoutineName="WalkingPathFix" />
+      <CallSubRoutine SubRoutineName="VendorUnwanted" />
+      <CallSubRoutine SubRoutineName="SellAllToAH" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="ReadAllMails" ChildrenCount="6">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8862" Y="642" Z="96" />
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="1">
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="1605.058" Y="-4422.912" Z="13.71172" />
+      </If>
+      <InteractionAction Entry="197135" InteractDelay="0" InteractType="GameObject" GameObjectType="Mailbox" SpellFocus="Anvil" />
+      <CustomAction Code="Lua.DoString( &quot;CheckInbox()&quot; );" />
+      <CustomAction Code="Lua.DoString(&quot;for mail=1,50 do GetInboxText(mail) end&quot;);" />
+      <SubRoutine SubRoutineName="FixBaseMoney" ChildrenCount="1">
+        <While Condition="Me.Gold &lt;3" IgnoreCanRun="True" ChildrenCount="3">
+          <CallSubRoutine SubRoutineName="GetAllMail" />
+          <CallSubRoutine SubRoutineName="SellAllToVendor" />
+          <CallSubRoutine SubRoutineName="MailMaintainAndRefresh" />
+        </While>
+      </SubRoutine>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="SellAllToVendor" ChildrenCount="2">
+      <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="3">
+        <SellItemAction NpcEntry="3342" X="1627.99" Y="-4386.13" Z="20.98238" ItemID="" Count="0" SellItemType="Greys" />
+        <SellItemAction NpcEntry="3342" X="1627.99" Y="-4386.13" Z="20.98238" ItemID="" Count="0" SellItemType="Greens" />
+        <SellItemAction NpcEntry="3342" X="1627.99" Y="-4386.13" Z="20.98238" ItemID="" Count="0" SellItemType="Whites" />
+      </If>
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="3">
+        <SellItemAction NpcEntry="6740" X="-8865.786" Y="669.6729" Z="97.90324" ItemID="" Count="0" SellItemType="Greys" />
+        <SellItemAction NpcEntry="6740" X="-8865.786" Y="669.6729" Z="97.90324" ItemID="" Count="0" SellItemType="Whites" />
+        <SellItemAction NpcEntry="6740" X="-8865.786" Y="669.6729" Z="97.90324" ItemID="" Count="0" SellItemType="Greens" />
+      </If>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="VendorUnwanted" ChildrenCount="2">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="2">
+        <SellItemAction NpcEntry="6740" X="-8865.786" Y="669.6729" Z="97.90324" ItemID="7912" Count="100" SellItemType="Specific" />
+        <SellItemAction NpcEntry="6740" X="-8865.786" Y="669.6729" Z="97.90324" ItemID="" Count="0" SellItemType="Greys" />
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="2">
+        <SellItemAction NpcEntry="3342" X="0" Y="0" Z="0" ItemID="" Count="0" SellItemType="Greys" />
+        <SellItemAction NpcEntry="3342" X="1627.99" Y="-4386.13" Z="20.98246" ItemID="7912" Count="100" SellItemType="Specific" />
+      </If>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="SellAllToAH" ChildrenCount="10">
+      <SellItemOnAhAction ItemID="0" MinBuyout="0g50s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="0" MinBuyout="0g50s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="1" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="0" MinBuyout="0g50s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="1" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Miscellaneous" SubCategoryType="WoWItemMiscClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="1" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Weapon" SubCategoryType="WoWItemWeaponClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="1" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Armor" SubCategoryType="WoWItemArmorClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Consumable" SubCategoryType="WoWItemContainerClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="1" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Container" SubCategoryType="SubCategoryType" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Projectile" SubCategoryType="SubCategoryType" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Reagent" SubCategoryType="SubCategoryType" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+      <SellItemOnAhAction ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" RunTime="_12_Hours" Amount="10" StackSize="20" AmountType="Everything" AutoFindAh="True" BidPrecent="60" UndercutPrecent="2" UseCategory="True" Category="Recipe" SubCategoryType="WoWItemRecipeClass" SubCategory="None" X="0" Y="0" Z="0" PostIfBelowMinBuyout="True" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="GetAllMail" ChildrenCount="2">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+        <GetMailAction ItemID="0" CheckNewMail="True" GetMailType="AllItems" AutoFindMailBox="False" X="-8860" Y="637" Z="96" MinFreeBagSlots="2" />
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="1">
+        <GetMailAction ItemID="0" CheckNewMail="True" GetMailType="AllItems" AutoFindMailBox="False" X="1605.058" Y="-4422.912" Z="13.71172" MinFreeBagSlots="2" />
+      </If>
+    </SubRoutine>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Smelt Functions" ChildrenCount="3">
+    <SubRoutine SubRoutineName="BuySmeltMaterials" ChildrenCount="13">
+      <CallSubRoutine SubRoutineName="BuyHardenedElementiumMaterials" />
+      <CallSubRoutine SubRoutineName="BuyEnchantedThoriumMaterials" />
+      <CallSubRoutine SubRoutineName="BuyWhiteSmeltMaterials" />
+      <CallSubRoutine SubRoutineName="BuyTitanSteelMaterials" />
+      <CallSubRoutine SubRoutineName="BuyGreenSmeltMaterials" />
+      <CallSubRoutine SubRoutineName="BuyFellSteelMaterials" />
+      <SubRoutine SubRoutineName="MailGemAndTradeGoods" ChildrenCount="2">
+        <MailItemAction Entry="0" AutoFindMailBox="True" UseCategory="True" Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" X="0" Y="0" Z="0" />
+        <MailItemAction Entry="0" AutoFindMailBox="True" UseCategory="True" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="TradeGoods" X="0" Y="0" Z="0" />
+      </SubRoutine>
+      <SubRoutine SubRoutineName="BuyFellSteelMaterials" ChildrenCount="2">
+        <BuyItemFromAhAction ItemID="23424" MaxBuyout="5g0s0c" Amount="6" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="23427" MaxBuyout="5g0s0c" Amount="4" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+      </SubRoutine>
+      <SubRoutine SubRoutineName="BuyGreenSmeltMaterials" ChildrenCount="8">
+        <BuyItemFromAhAction ItemID="23426" MaxBuyout="5g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="23427" MaxBuyout="5g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="7911" MaxBuyout="5g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="2776" MaxBuyout="5g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="2775" MaxBuyout="5g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="36910" MaxBuyout="5g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="52183" MaxBuyout="5g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="23424" MaxBuyout="5g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+      </SubRoutine>
+      <SubRoutine SubRoutineName="BuyHardenedElementiumMaterials" ChildrenCount="2">
+        <BuyItemFromAhAction ItemID="52185" MaxBuyout="3g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="52327" MaxBuyout="12g0s0c" Amount="4" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+      </SubRoutine>
+      <SubRoutine SubRoutineName="BuyTitanSteelMaterials" ChildrenCount="4">
+        <BuyItemFromAhAction ItemID="35627" MaxBuyout="75g75s75c" Amount="1" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="36860" MaxBuyout="75g75s75c" Amount="1" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="35624" MaxBuyout="75g75s75c" Amount="1" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="36910" MaxBuyout="5g0s0c" Amount="6" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+      </SubRoutine>
+      <SubRoutine SubRoutineName="BuyEnchantedThoriumMaterials" ChildrenCount="2">
+        <BuyItemFromAhAction ItemID="11176" MaxBuyout="3g0s0c" Amount="2" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="10620" MaxBuyout="3g0s0c" Amount="2" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+      </SubRoutine>
+      <SubRoutine SubRoutineName="BuyWhiteSmeltMaterials" ChildrenCount="9">
+        <While Condition="false" IgnoreCanRun="True" ChildrenCount="2">
+          <Comment Text="DarkIron Smelt Neeed to be molten core Quest Done" />
+          <BuyItemFromAhAction ItemID="11370" MaxBuyout="3g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        </While>
+        <BuyItemFromAhAction ItemID="36912" MaxBuyout="3g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="36909" MaxBuyout="3g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="2772" MaxBuyout="3g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="10620" MaxBuyout="3g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="53038" MaxBuyout="3g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="3858" MaxBuyout="3g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="23425" MaxBuyout="3g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+        <BuyItemFromAhAction ItemID="52185" MaxBuyout="3g0s0c" Amount="20" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+      </SubRoutine>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="SmeltAll" ChildrenCount="27">
+      <CastSpellAction Entry="2657" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="3304" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="2659" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="2658" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="3569" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="3307" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="3308" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="10097" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="10098" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="16153" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="70524" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="29356" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="29358" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="29359" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="29360" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="29686" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="29361" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="49252" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="49258" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="55208" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="55211" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="84038" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="74530" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="74537" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="74529" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="35751" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+      <CastSpellAction Entry="35750" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="GoToForgeAndSmelt" ChildrenCount="3">
+      <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="2">
+        <If Condition="Me.IsFlying" IgnoreCanRun="True" ChildrenCount="1">
+          <FlyToAction Dismount="True" X="2059.807" Y="-4765.928" Z="27.56209" />
+        </If>
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="2056.055" Y="-4827.51" Z="27.47181" />
+      </If>
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="2">
+        <If Condition="Me.IsFlying" IgnoreCanRun="True" ChildrenCount="1">
+          <FlyToAction Dismount="True" X="-8969.993" Y="779.6597" Z="96.25022" />
+        </If>
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8423.598" Y="628.4059" Z="95.74567" />
+      </If>
+      <CallSubRoutine SubRoutineName="SmeltAll" />
+    </SubRoutine>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Unorganized Functions" ChildrenCount="6">
+    <SubRoutine SubRoutineName="InitiateMiningAndHerbalismSkill_Buy_Mining_Pick" ChildrenCount="2">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+        <While Condition="Herbalism.MaxLevel == 0 ||  Mining.MaxLevel == 0 || (InbagCount (2901) == 0 &amp;&amp; InbagCount (40772) == 0) " IgnoreCanRun="True" ChildrenCount="5">
+          <If Condition="Me.IsFlying" IgnoreCanRun="True" ChildrenCount="1">
+            <FlyToAction Dismount="True" X="-8969.993" Y="779.6597" Z="96.25022" />
+          </If>
+          <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8969.993" Y="779.6597" Z="96.25022" />
+          <If Condition="Herbalism.MaxLevel == 0" IgnoreCanRun="True" ChildrenCount="1">
+            <TrainSkillAction NpcEntry="5566" X="-8969.993" Y="779.6597" Z="96.25022" />
+          </If>
+          <If Condition="Mining.MaxLevel == 0" IgnoreCanRun="True" ChildrenCount="1">
+            <TrainSkillAction NpcEntry="5513" X="-8433.48" Y="688.922" Z="96.31891" />
+          </If>
+          <If Condition="InbagCount (2901) == 0 &amp;&amp; InbagCount (40772) == 0" IgnoreCanRun="True" ChildrenCount="3">
+            <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8430.177" Y="695.1375" Z="96.31892" />
+            <InteractionAction Entry="5514" InteractDelay="0" InteractType="NPC" GameObjectType="Mailbox" SpellFocus="Anvil" />
+            <BuyItemAction NpcEntry="0" X="0" Y="0" Z="0" ItemID="2901" Count="1" BuyItemType="SpecificItem" />
+          </If>
+        </While>
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="1">
+        <While Condition="Herbalism.MaxLevel == 0 || Mining.MaxLevel == 0 || (InbagCount (2901) == 0 &amp;&amp; InbagCount (40772) == 0) " IgnoreCanRun="True" ChildrenCount="5">
+          <If Condition="Me.IsFlying" IgnoreCanRun="True" ChildrenCount="1">
+            <FlyToAction Dismount="True" X="2059.807" Y="-4765.928" Z="27.56209" />
+          </If>
+          <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="2059.807" Y="-4765.928" Z="27.56209" />
+          <If Condition="Mining.MaxLevel == 0" IgnoreCanRun="True" ChildrenCount="1">
+            <TrainSkillAction NpcEntry="3357" X="2081.978" Y="-4764.085" Z="27.92557" />
+          </If>
+          <If Condition="Herbalism.MaxLevel == 0" IgnoreCanRun="True" ChildrenCount="1">
+            <TrainSkillAction NpcEntry="46741" X="1902.69" Y="-4450.71" Z="53.4155" />
+          </If>
+          <If Condition="InbagCount (2901) == 0 &amp;&amp; InbagCount (40772) == 0" IgnoreCanRun="True" ChildrenCount="3">
+            <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="2087.52" Y="-4769.45" Z="27.92924" />
+            <InteractionAction Entry="3358" InteractDelay="0" InteractType="NPC" GameObjectType="Mailbox" SpellFocus="Anvil" />
+            <BuyItemAction NpcEntry="0" X="0" Y="0" Z="0" ItemID="2901" Count="1" BuyItemType="SpecificItem" />
+          </If>
+        </While>
+      </If>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="StopGatheringWhileSkillsAreMaxedOut" ChildrenCount="4">
+      <While Condition="(bool)Settings[&quot;Herb&quot;] &amp;&amp; Herbalism.Level != Herbalism.MaxLevel" IgnoreCanRun="True" ChildrenCount="1">
+        <CustomAction Code="Bots.Gatherbuddy.GatherbuddySettings.Instance.GatherHerbs = true;" />
+      </While>
+      <While Condition="(bool)Settings[&quot;Herb&quot;] &amp;&amp; ((Herbalism.Level == Herbalism.MaxLevel) || !((bool)Settings[&quot;Herb&quot;]))" IgnoreCanRun="True" ChildrenCount="1">
+        <CustomAction Code="Bots.Gatherbuddy.GatherbuddySettings.Instance.GatherHerbs = false;" />
+      </While>
+      <While Condition="(bool)Settings[&quot;Mining&quot;] &amp;&amp; Mining.Level != Mining.MaxLevel " IgnoreCanRun="True" ChildrenCount="1">
+        <CustomAction Code="Bots.Gatherbuddy.GatherbuddySettings.Instance.GatherMinerals = true;" />
+      </While>
+      <While Condition="((bool)Settings[&quot;Mining&quot;] &amp;&amp; Mining.Level == Mining.MaxLevel) || !((bool)Settings[&quot;Mining&quot;])" IgnoreCanRun="True" ChildrenCount="1">
+        <CustomAction Code="Bots.Gatherbuddy.GatherbuddySettings.Instance.GatherMinerals = false;" />
+      </While>
+    </SubRoutine>
+    <SubRoutine SubRoutineName="EmergencyStop" ChildrenCount="2">
+      <CustomAction Code="MessageBox.Show(&quot;TheReason I am Stopping It&quot;);" />
+      <CustomAction Code="TreeRoot.Stop();" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="SetGatherBuddy2Settings" ChildrenCount="1">
+      <CustomAction Code="Bots.Gatherbuddy.GatherbuddySettings.Instance.MailToAlt=true;" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="UseContainerItem" ChildrenCount="1">
+      <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 22574 then UseContainerItem(bag,slot) end end end&quot;);" />
+    </SubRoutine>
+    <SubRoutine SubRoutineName="GetLvl20Mount_INDEV" ChildrenCount="3">
+      <If Condition="Me.IsHorde" IgnoreCanRun="True" ChildrenCount="3">
+        <If Condition="Me.IsFlying" IgnoreCanRun="True" ChildrenCount="1">
+          <FlyToAction Dismount="True" X="2059.807" Y="-4765.928" Z="27.56209" />
+        </If>
+        <TrainSkillAction NpcEntry="4752" X="2085.36" Y="-4572.86" Z="49.25346" />
+        <BuyItemAction NpcEntry="3362" X="2077.21" Y="-4566.8" Z="49.25306" ItemID="1132" Count="1" BuyItemType="SpecificItem" />
+      </If>
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+        <If Condition="Me.IsFlying" IgnoreCanRun="True" ChildrenCount="1">
+          <FlyToAction Dismount="True" X="-8969.993" Y="779.6597" Z="96.25022" />
+        </If>
+      </If>
+      <BuyItemAction NpcEntry="0" X="0" Y="0" Z="0" ItemID="" Count="0" BuyItemType="Material" />
+    </SubRoutine>
+  </SubRoutine>
+  <While Condition="true" IgnoreCanRun="True" ChildrenCount="1">
+    <If Condition="Me.FreeBagSlots&lt;11" IgnoreCanRun="True" ChildrenCount="1">
+      <SellItemAction NpcEntry="0" X="0" Y="0" Z="0" ItemID="" Count="0" SellItemType="Greys" />
+    </If>
+  </While>
+  <While Condition="false" IgnoreCanRun="True" ChildrenCount="5">
+    <GetMailAction ItemID="" CheckNewMail="True" GetMailType="AllItems" AutoFindMailBox="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" />
+    <CallSubRoutine SubRoutineName="SellAllToVendor" />
+    <CallSubRoutine SubRoutineName="SellAllToAH" />
+    <BuyItemFromAhAction ItemID="52327" MaxBuyout="2g0s0c" Amount="400" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" />
+    <CallSubRoutine SubRoutineName="GoToForgeAndSmelt" />
+  </While>
+</Professionbuddy>
