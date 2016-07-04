@@ -1,4 +1,0 @@
-Banking Time Increased 30 mintues more in NetAndClockChecker.au3 line 46
-~~~~~If $localtime> "18:00:00" And $localtime < "19:30:00" Then
-Working Directory added for thread issues in WOWHBLoginPIDArray.au3 line 133
-~~~~$HBPID=Run("""D:\WORKBENCH 1\HB\Honorbuddy.exe"" /autostart /pid="& $WowPid,"D:\WORKBENCH 1\HB\")
